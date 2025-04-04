@@ -1,0 +1,218 @@
+/* styles.css */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Space+Grotesk:wght@400;700&display=swap'); /* Police Fun: Space Grotesk */
+
+/* --- Variables CSS Globales --- */
+:root {
+    /* Dimensions */
+    --header-height: 65px;
+    --sidebar-width: 260px;
+    --base-border-radius: 6px; /* Un peu plus carré peut-être? */
+
+    /* Police */
+    --font-heading: 'Montserrat', sans-serif;
+    --font-body: 'Space Grotesk', sans-serif; /* Utiliser la police fun */
+
+    /* Couleurs - Thème "Nébuleuse" (Sombre de base pour le réacteur?) */
+    --color-primary: #3498db; /* Bleu vibrant */
+    --color-secondary: #2c3e50; /* Bleu nuit foncé */
+    --color-accent: #e67e22; /* Orange vif */
+    --color-background: #1a2533; /* Très sombre */
+    --color-surface: #2c3e50; /* Bleu nuit pour les cartes, header? */
+    --color-text: #ecf0f1; /* Texte clair */
+    --color-text-muted: #bdc3c7; /* Texte plus pâle */
+    --color-text-on-primary: #ffffff;
+    --color-border: #4a617a; /* Bordure sombre mais visible */
+    --color-success: #2ecc71;
+    --color-error: #e74c3c;
+
+    /* Ombres */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* --- Reset & Base --- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    overflow-x: hidden;
+    padding-top: var(--header-height); /* Espace pour le header fixe */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* --- Header --- */
+#main-header {
+    background-color: var(--color-surface);
+    height: var(--header-height);
+    box-shadow: var(--shadow-md);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.hamburger {
+    cursor: pointer;
+    padding: 10px;
+    margin-right: 10px;
+    z-index: 1001;
+}
+.hamburger span {
+    display: block; width: 28px; height: 3px;
+    background: var(--color-primary); /* Couleur accent sur fond sombre */
+    margin: 6px 0; border-radius: 3px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 0 5px var(--color-primary); /* Effet néon léger */
+}
+.hamburger.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+#header-logo {
+    height: 45px; /* Un peu plus grand */
+    width: auto;
+    margin-right: 15px;
+    transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Effet rebond */
+}
+#header-logo:hover {
+    transform: rotate(360deg) scale(1.1);
+}
+
+#main-header h1 {
+    font-family: var(--font-heading);
+    color: var(--color-text);
+    font-size: 1.5em;
+    font-weight: 700;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+/* Style bouton PWA */
+#install-button {
+    display: none; /* Sera affiché par JS */
+    margin-left: auto; /* Pousse à droite */
+    padding: 8px 15px;
+    background-color: var(--color-accent);
+    color: var(--color-text-on-primary);
+    border: none;
+    border-radius: var(--base-border-radius);
+    font-family: var(--font-heading);
+    font-size: 0.9em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 0 10px rgba(230, 126, 34, 0.5); /* Lueur accent */
+    animation: pulse-install 2s infinite ease-in-out; /* Animation quand visible */
+}
+#install-button:hover {
+    background-color: color-mix(in srgb, var(--color-accent) 85%, black);
+    transform: scale(1.05);
+}
+#install-button .install-icon { margin-right: 8px; }
+
+@keyframes pulse-install {
+    0% { transform: scale(1); box-shadow: 0 0 10px rgba(230, 126, 34, 0.5); }
+    50% { transform: scale(1.03); box-shadow: 0 0 15px rgba(230, 126, 34, 0.8); }
+    100% { transform: scale(1); box-shadow: 0 0 10px rgba(230, 126, 34, 0.5); }
+}
+
+/* --- Sidebar --- */
+#sidebar {
+    position: fixed;
+    top: var(--header-height); /* Commence sous le header */
+    left: calc(-1 * var(--sidebar-width)); /* Caché à gauche */
+    width: var(--sidebar-width);
+    height: calc(100% - var(--header-height)); /* Toute la hauteur restante */
+    background-color: var(--color-secondary);
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.2);
+    transition: left 0.3s ease-in-out;
+    z-index: 999;
+    padding: 20px 0; /* Espace haut/bas */
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    border-right: 1px solid var(--color-border);
+}
+#sidebar.active { left: 0; }
+#sidebar ul { list-style: none; padding: 0; margin: 0; flex-grow: 1; }
+#sidebar ul li { margin: 0; }
+#sidebar ul li button:not(.theme-button) {
+    background: none; border: none;
+    padding: 12px 20px;
+    font-size: 1.1em; font-family: var(--font-body); color: var(--color-text-muted);
+    cursor: pointer; transition: all 0.2s ease;
+    width: 100%; text-align: left; display: flex; align-items: center; gap: 12px;
+    border-left: 4px solid transparent; /* Indicateur actif */
+}
+#sidebar ul li button:not(.theme-button):hover,
+#sidebar ul li button.active-page { /* Style pour la page active (à ajouter via JS) */
+    background-color: rgba(236, 240, 241, 0.05);
+    color: var(--color-text);
+    border-left-color: var(--color-primary); /* Indicateur visible */
+}
+
+.nav-divider {
+    height: 1px; background-color: var(--color-border);
+    margin: 15px 20px;
+}
+
+/* Structure Theme Switcher (basique) */
+.theme-switcher-container { padding: 10px 20px; }
+.theme-switcher-container h4 {
+    color: var(--color-text-muted); font-size: 0.85em;
+    margin-bottom: 10px; text-transform: uppercase;
+    font-weight: 500; letter-spacing: 0.5px;
+}
+.theme-buttons-wrapper { display: flex; flex-wrap: wrap; gap: 8px; }
+/* Style des boutons de thème (à venir) */
+
+/* --- Main Content --- */
+#main-content {
+    padding: 25px;
+    max-width: 900px; /* Un peu plus large? */
+    margin: 0 auto;
+    min-height: calc(100vh - var(--header-height) - 60px); /* Hauteur min pour pousser footer */
+    /* Style de chargement simple */
+    display: flex; justify-content: center; align-items: center;
+}
+#main-content p { /* Style pour le message initial */
+    font-style: italic; color: var(--color-text-muted);
+}
+
+/* --- Footer --- */
+#main-footer {
+    text-align: center;
+    padding: 15px;
+    background: var(--color-surface);
+    color: var(--color-text-muted);
+    font-size: 0.9em;
+    border-top: 1px solid var(--color-border);
+    margin-top: 30px; /* Espace avant le footer */
+}
+
+/* --- Classes Utilitaires Basiques --- */
+.loading-message { color: var(--color-text-muted); font-style: italic; }
+.error-message { color: var(--color-error); font-weight: bold; }
+
+/* --- Responsive (Minimal pour commencer) --- */
+@media (max-width: 768px) {
+    :root {
+        --sidebar-width: 240px;
+        --header-height: 60px;
+    }
+    #sidebar { left: calc(-1 * var(--sidebar-width)); }
+    #main-header h1 { font-size: 1.3em; }
+    #install-button { padding: 6px 10px; font-size: 0.8em; }
+    #main-content { padding: 15px; }
+}
