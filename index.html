@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Réacteur CSE CRM59</title> <!-- Titre Fun ! -->
+
+    <!-- Icônes et Manifest PWA -->
+    <link rel="shortcut icon" href="./icons/favicon.ico"> <!-- Assurez-vous que ce fichier existe -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#34495E"> <!-- Couleur de base pour PWA -->
+
+    <!-- CSS - On ajoutera les libs JS plus tard si besoin -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- On pourrait ajouter FontAwesome ici plus tard si besoin d'icônes -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.x.x/css/all.min.css"> -->
+
+</head>
+<body>
+
+    <header id="main-header">
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <!-- Logo - Mettez le chemin correct vers votre nouveau logo -->
+        <img src="img/logo-reacteur.png" alt="Logo Réacteur CSE" class="logo" id="header-logo">
+        <h1>Le Réacteur</h1>
+        <!-- Bouton PWA "Embarquement" -->
+        <button id="install-button" style="display: none;">
+             <!-- Icone à ajouter via CSS ou FontAwesome si intégré -->
+            <span class="install-icon">🚀</span> <!-- Placeholder fun -->
+            Embarquer !
+        </button>
+    </header>
+
+    <nav id="sidebar" class="sidebar">
+        <ul>
+            <!-- Menu principal (Vide pour l'instant, on remplira dynamiquement ou statiquement plus tard) -->
+            <li><button onclick="loadPage('accueil')">Sas d'Accueil</button></li>
+            <li><button onclick="loadPage('scoops')">Scoops Brûlants</button></li>
+            <li><button onclick="loadPage('vortex')">Vortex Temporel</button></li>
+            <!-- ... autres liens ... -->
+
+            <!-- Séparateur Visuel -->
+            <li class="nav-divider"></li>
+
+            <!-- Switcher de Thème (structure de base) -->
+            <li>
+                <div class="theme-switcher-container">
+                    <h4>Panneau de Contrôle Visuel :</h4>
+                    <div class="theme-buttons-wrapper">
+                        <!-- Boutons de thème à ajouter via JS ou statiquement -->
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <main id="main-content">
+        <!-- Le contenu des pages sera injecté ici par le script JS -->
+        <p>Initialisation du Réacteur...</p>
+    </main>
+
+    <footer id="main-footer">
+        <p>© <span id="current-year">2024</span> Réacteur CSE CRM59 - Propulsion assurée.</p>
+    </footer>
+
+    <!-- Script principal - TOUJOURS à la fin du body -->
+    <script src="script.js"></script>
+    <!-- On ajoutera PapaParse ici si besoin pour les CSV -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script> -->
+
+</body>
+</html>
