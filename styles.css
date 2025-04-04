@@ -628,7 +628,106 @@ body.theme-pixel #main-footer { /* ... (Pixel footer) ... */
    .partner-category-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; }
    .members-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px; }
 }
+/* ============================================ */
+/*          AJOUTS CSS - DINGUERIE V1           */
+/* ============================================ */
 
+/* --- Animation Titre de Page H2 --- */
+@keyframes fadeInSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#main-content h2.title-animate {
+    /* Appliquer l'animation définie ci-dessus */
+    animation: fadeInSlideUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    /* 'forwards' maintient l'état final de l'animation */
+}
+/* Animation titre Pixel (plus abrupte) */
+@keyframes pixelPopIn {
+    0% { transform: scale(0.8); opacity: 0; }
+    80% { transform: scale(1.05); opacity: 1;}
+    100% { transform: scale(1); opacity: 1; }
+}
+body.theme-pixel #main-content h2.title-animate {
+    animation: pixelPopIn 0.3s steps(4, end) forwards;
+}
+
+/* --- Styles Countdown Timer (dans Event) --- */
+.countdown-container {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dotted var(--color-border);
+    font-family: var(--font-body-standard); /* Utiliser une police lisible */
+    text-align: right; /* Aligner à droite sous la description ? */
+}
+body.theme-pixel .countdown-container {
+    font-family: var(--font-pixel); /* Utiliser pixel ici aussi */
+    font-size: 0.9rem;
+    text-align: center; /* Centrer en pixel */
+    border-top: 2px dashed var(--color-border);
+}
+.countdown-timer {
+    font-weight: bold;
+    color: var(--color-accent); /* Compteur en couleur accent */
+    margin-left: 5px;
+    display: inline-block; /* Pour dimensions si besoin */
+    min-width: 100px; /* Pour éviter sauts de taille */
+    text-align: left;
+}
+body.theme-pixel .countdown-timer { color: var(--color-accent); min-width: 120px;}
+
+/* --- Styles Vibe-O-Mètre Améliorés --- */
+button.vibe-btn { /* Styles existants... */ position: relative; overflow: hidden; }
+
+/* Feedback Visuel Clic sur Vibe Bouton */
+button.vibe-btn::after { /* Pseudo-élément pour l'effet */
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 5px; height: 5px;
+    background: color-mix(in srgb, var(--color-primary) 50%, transparent);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+button.vibe-btn.vibe-btn--clicked::after {
+    transform: translate(-50%, -50%) scale(15); /* Taille de l'onde */
+    opacity: 0.5;
+    /* L'animation se joue quand la classe est ajoutée par JS */
+}
+body.theme-pixel button.vibe-btn.vibe-btn--clicked {
+    /* Effet Pixel Clic: juste changer la couleur de fond/bordure brièvement? */
+     background-color: var(--color-surface);
+     border-color: var(--color-accent);
+     color: var(--color-accent);
+}
+
+/* Assurer que les styles .loading-state / .error-message sont présents (déjà dans la version précédente) */
+/* ... */
+
+/* --- Ajustements Potentiels pour sons sur thèmes --- */
+/* Optionnel : Faire "pulser" le bouton de thème pendant le son ? */
+body.theme-pixel .theme-switcher-container button.theme-button.active-theme {
+   /* Garder l'état actif mais peut-être ajouter une petite animation de confirmation? */
+   /* animation: pixelConfirm 0.3s steps(2, end); */
+}
+@keyframes pixelConfirm {
+    0%, 100% { box-shadow: 3px 3px 0px var(--color-secondary); }
+    50% { box-shadow: 1px 1px 0px var(--color-secondary); }
+}
+
+
+/* Fin des ajouts CSS pour Dinguerie V1 */
 /* ============================================ */
 /*              FIN DU STYLESHEET              */
 /* ============================================ */
