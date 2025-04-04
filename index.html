@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Le Réacteur CSE CRM59</title> <!-- Titre Fun ! -->
+    <title>Le Réacteur CSE CRM59</title>
 
-    <!-- Icônes et Manifest PWA -->
-    <link rel="shortcut icon" href="./icons/favicon.ico"> <!-- Assurez-vous que ce fichier existe -->
+    <link rel="shortcut icon" href="./icons/favicon.ico">
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#34495E"> <!-- Couleur de base pour PWA -->
+    <meta name="theme-color" content="#34495E">
 
-    <!-- CSS - On ajoutera les libs JS plus tard si besoin -->
+    <!-- === AJOUT DE FONT AWESOME === -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- === FIN AJOUT === -->
+
     <link rel="stylesheet" href="styles.css">
-    <!-- On pourrait ajouter FontAwesome ici plus tard si besoin d'icônes -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.x.x/css/all.min.css"> -->
-
 </head>
 <body>
 
@@ -24,34 +23,47 @@
             <span></span>
             <span></span>
         </div>
-        <!-- Logo - Mettez le chemin correct vers votre nouveau logo -->
         <img src="img/logo-reacteur.png" alt="Logo Réacteur CSE" class="logo" id="header-logo">
         <h1>Le Réacteur</h1>
-        <!-- Bouton PWA "Embarquement" -->
         <button id="install-button" style="display: none;">
-             <!-- Icone à ajouter via CSS ou FontAwesome si intégré -->
-            <span class="install-icon">🚀</span> <!-- Placeholder fun -->
+            <!-- === Icône FontAwesome === -->
+            <i class="fas fa-rocket install-icon"></i>
+            <!-- === FIN Icône === -->
             Embarquer !
         </button>
     </header>
 
     <nav id="sidebar" class="sidebar">
         <ul>
-            <!-- Menu principal (Vide pour l'instant, on remplira dynamiquement ou statiquement plus tard) -->
-            <li><button onclick="loadPage('accueil')">Sas d'Accueil</button></li>
-            <li><button onclick="loadPage('scoops')">Scoops Brûlants</button></li>
-            <li><button onclick="loadPage('vortex')">Vortex Temporel</button></li>
-            <!-- ... autres liens ... -->
+            <!-- === VRAIS LIENS AVEC ICÔNES === -->
+            <li><button onclick="loadPage('accueil')"><span class="icon"><i class="fas fa-house-signal"></i></span> <span class="nav-text">Sas d'Accueil</span></button></li>
+            <li><button onclick="loadPage('scoops')"><span class="icon"><i class="fas fa-bullhorn"></i></span> <span class="nav-text">Scoops Brûlants</span></button></li>
+            <li><button onclick="loadPage('vortex')"><span class="icon"><i class="fas fa-calendar-days"></i></span> <span class="nav-text">Vortex Temporel</span></button></li>
+            <li><button onclick="loadPage('sos-cafeine')"><span class="icon"><i class="fas fa-mug-hot"></i></span> <span class="nav-text">SOS Caféine</span></button></li>
+            <li><button onclick="loadPage('holocom')"><span class="icon"><i class="fas fa-headset"></i></span> <span class="nav-text">Holocom' CSE</span></button></li>
+            <li><button onclick="loadPage('galaxie')"><span class="icon"><i class="fas fa-star"></i></span> <span class="nav-text">Galaxie Avantages</span></button></li>
+            <li><button onclick="loadPage('boosters')"><span class="icon"><i class="fas fa-bolt"></i></span> <span class="nav-text">Boosters $ & Habitat</span></button></li>
+             <li><button onclick="loadPage('equipage')"><span class="icon"><i class="fas fa-users-gear"></i></span> <span class="nav-text">L'Équipage</span></button></li>
+             <!-- ... Ajoutez d'autres pages si nécessaire ... -->
+             <!-- === FIN VRAIS LIENS === -->
 
-            <!-- Séparateur Visuel -->
             <li class="nav-divider"></li>
 
-            <!-- Switcher de Thème (structure de base) -->
             <li>
                 <div class="theme-switcher-container">
                     <h4>Panneau de Contrôle Visuel :</h4>
-                    <div class="theme-buttons-wrapper">
-                        <!-- Boutons de thème à ajouter via JS ou statiquement -->
+                    <div class="theme-buttons-wrapper" id="theme-buttons">
+                        <!-- Les boutons de thème seront injectés ici par JS -->
+                        <button data-theme="theme-nebula" class="theme-button active-theme" title="Thème Nébuleuse (Défaut)">
+                            <i class="fas fa-atom"></i>
+                        </button>
+                        <button data-theme="theme-daylight" class="theme-button" title="Thème Lumière du Jour (Clair)">
+                            <i class="fas fa-sun"></i>
+                        </button>
+                         <button data-theme="theme-pixel" class="theme-button" title="Thème Rétro Pixel">
+                            <i class="fas fa-gamepad"></i>
+                        </button>
+                        <!-- Ajouter d'autres boutons manuellement ou via JS -->
                     </div>
                 </div>
             </li>
@@ -59,7 +71,6 @@
     </nav>
 
     <main id="main-content">
-        <!-- Le contenu des pages sera injecté ici par le script JS -->
         <p>Initialisation du Réacteur...</p>
     </main>
 
@@ -67,9 +78,8 @@
         <p>© <span id="current-year">2024</span> Réacteur CSE CRM59 - Propulsion assurée.</p>
     </footer>
 
-    <!-- Script principal - TOUJOURS à la fin du body -->
     <script src="script.js"></script>
-    <!-- On ajoutera PapaParse ici si besoin pour les CSV -->
+    <!-- PapaParse toujours commenté pour l'instant -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script> -->
 
 </body>
