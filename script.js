@@ -255,37 +255,94 @@ function attachFormEvents(formId) {
 }
 
 function onFormSubmit(formId) {
-     if (!window.isFormSubmitting) return; // Ne rien faire si pas en soumission
-     window.isFormSubmitting = false; // Réinitialiser le flag immédiatement
+    // Ne rien faire si le formulaire n'est pas en cours de soumission via notre logique
+    // (Cela évite de déclencher cette fonction si l'iframe se charge pour une autre raison)
+    if (!window.isFormSubmitting) return;
 
-    console.log(`Réponse reçue de l'iframe pour le formulaire ${formId}. Affichage confirmation.`);
-     const form = document.getElementById(formId);
-     if (!form) { console.warn(`Impossible de trouver le formulaire ${formId} pour la confirmation.`); return; }
+    // Réinitialiser le flag immédiatement pour éviter les déclenchements multiples
+    window.isFormSubmitting = false;
 
-     const submitButton = form.querySelector('button[type="submit"]');
-     const sendingStatus = form.querySelector('.form-status-sending');
-     const confirmationDiv = form.querySelector('.confirmation-message');
+    console.log(`[Form Submit] Réponse reçue de l'iframe pour ${formId}.`);
 
-    // Cache le statut d'envoi, montre la confirmation
-     if (sendingStatus) sendingStatus.style.display = 'none';
-     if (confirmationDiv) confirmationDiv.style.display = 'block';
-     if (form) form.style.display = 'none'; // Cacher le formulaire après succès
+    // Retrouver les éléments du DOM liés à ce formulaire
+    const form = document.getElementById(formId);
+    if (!form) {
+        console.warn(`[Form Submit] Impossible de trouver le formulaire #${formId} pour afficher la confirmation.`);
+        return;
+    }
 
-     // Optionnel : Remonter en haut de page
-     window.scrollTo({ top: mainContent.offsetTop - var(--header-height, 65), behavior: 'smooth' });
+    const submitButton = form.querySelector('button[type="submit"]');
+    const sendingStatus = form.querySelector('.form-status-sending');
+    const confirmationDiv = form.querySelector('.confirmation-message');
 
-     // Réinitialiser le bouton et éventuellement le formulaire après un délai (si on veut le réafficher plus tard)
-     /*
-     setTimeout(() => {
-         if (submitButton) submitButton.disabled = false;
-         // Si on ne cache pas le form définitivement :
-         // if(form) form.reset();
-         // if(form) form.style.display = 'block';
-         // if(confirmationDiv) confirmationDiv.style.display = 'none';
-     }, 5000); // Réafficher après 5 secondes ?
-     */
+    // --- Afficher la confirmation et masquer le reste ---
+    if (sendingStatus) {
+        sendingStatus.style.display = 'none';
+        console.log(`[Form Submit] Masqué: indicateur d'envoi pour ${formId}.`);
+    }
+    if (confirmationDiv) {
+        confirmationDiv.style.display = 'block';
+         console.log(`[Form Submit] Affiché: message de confirmation pour ${formId}.`);
+    } else {
+         console.warn(`[Form Submit] Message de confirmation introuvable pour ${formId}.`);
+    }
+    if (form) {
+        form.style.display = 'none'; // Cacher le formulaire lui-même après l'envoi réussi
+        console.log(`[Form Submit] Masqué: formulaire ${formId}.`);
+    }
+
+    // --- Calcul et Scroll (Partie Corrigée) ---
+    try {
+        // 1. Obtenir les styles calculés du body (hérite des variables :root)
+        const bodyStyles = window.getComputedStyle(document.body);
+
+        // 2. Obtenir la valeur de la variable CSS --header-height (ex: "65px")
+        //    Ajout d'une valeur par défaut de '65px' au cas où la variable n'existerait pas
+        const headerHeightString = bodyStyles.getPropertyValue('--header-height').trim() || '65px';
+
+        // 3. Convertir la chaîne en nombre, en supprimant 'px'.
+        //    Utilise 65 comme fallback robuste si la conversion échoue.
+        const headerHeight = parseFloat(headerHeightString) || 65;
+
+        // Debug : Affiche la valeur calculée
+        console.log(`[Form Submit] Hauteur header calculée depuis CSS: ${headerHeight}px (Source: '${headerHeightString}')`);
+
+        // 4. Remonter en haut de la section principale, en laissant de l'espace pour le header fixe
+        //    Utilisation de la valeur 'headerHeight' qui est maintenant un nombre.
+        //    Assure que mainContent existe avant de calculer son offsetTop.
+        if (mainContent) {
+            const scrollTopTarget = mainContent.offsetTop - headerHeight - 10; // -10px pour petite marge
+            console.log(`[Form Submit] Scrolling vers ${scrollTopTarget}px.`);
+            window.scrollTo({
+                top: scrollTopTarget > 0 ? scrollTopTarget : 0, // Ne pas scroller à une valeur négative
+                behavior: 'smooth'
+            });
+        } else {
+            console.warn("[Form Submit] Element #main-content introuvable pour le scroll.");
+        }
+    } catch (error) {
+         console.error("[Form Submit] Erreur lors du calcul/scroll après soumission:", error);
+         // En cas d'erreur ici, le scroll ne se fera pas, mais la confirmation reste visible.
+    }
+
+    // --- Réinitialisation Optionnelle (peut rester commenté) ---
+    // Si vous souhaitez que l'utilisateur puisse resoumettre facilement
+    /*
+    setTimeout(() => {
+        if (submitButton) submitButton.disabled = false;
+        if (form) {
+            // Décommentez si vous voulez réinitialiser et réafficher le formulaire
+            // form.reset();
+            // form.style.display = 'block'; // ou 'flex'/'grid' selon votre CSS de base pour le form
+        }
+        if (confirmationDiv) {
+            // Décommentez si vous voulez cacher la confirmation après le délai
+            // confirmationDiv.style.display = 'none';
+        }
+         console.log(`[Form Submit] Fin du délai de réinitialisation pour ${formId}.`);
+    }, 5000); // Délai de 5 secondes
+    */
 }
-
 // --- STATIC PAGE INJECTION ---
 
 function injectAccueilPage() {
