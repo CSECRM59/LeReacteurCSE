@@ -1,528 +1,634 @@
-/* styles.css - VERSION COMPLÈTE AVEC 3 THÈMES */
+/* ============================================ */
+/*       STYLESHEET COMPLET - LE RÉACTEUR CSE    */
+/*          (Multi-Sections & Multi-Thèmes)     */
+/* ============================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Space+Grotesk:wght@400;700&family=Press+Start+2P&display=swap'); /* Ajout Police Pixel */
+/* --- Imports & Variables Globales --- */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Space+Grotesk:wght@400;700&family=Press+Start+2P&display=swap');
 
-/* --- Variables CSS Globales - Définitions Générales --- */
 :root {
-    /* Dimensions Fixes (Indépendantes du thème) */
+    /* Dimensions */
     --header-height: 65px;
     --sidebar-width: 260px;
     --base-border-radius: 6px;
-
-    /* Polices (Indépendantes mais sélectionnées par thème) */
+    /* Polices Base */
     --font-heading-standard: 'Montserrat', sans-serif;
     --font-body-standard: 'Space Grotesk', sans-serif;
-    --font-pixel: 'Press Start 2P', cursive; /* Police Pixel */
-
-    /* Ombre (Base - peut être ajustée par thème) */
-    --shadow-base-color: rgba(0, 0, 0, 0.7); /* Couleur ombre par défaut (sombre) */
-    --shadow-sm: 0 2px 4px hsla(0, 0%, 0%, 0.2); /* Ombre légère fixe */
-    --shadow-md: 0 5px 15px hsla(0, 0%, 0%, 0.3); /* Ombre moyenne fixe */
-
-    /* Transitions (Standard) */
+    --font-pixel: 'Press Start 2P', cursive;
+    /* Ombres Base */
+    --shadow-base-color-rgb: 0, 0, 0; /* Noir pour ombres par défaut */
+    --shadow-sm: 0 2px 4px hsla(0, 0%, 0%, 0.15);
+    --shadow-md: 0 5px 15px hsla(0, 0%, 0%, 0.25);
+    /* Transitions */
     --transition-fast: all 0.2s ease-out;
     --transition-normal: all 0.3s ease-in-out;
 }
-
 
 /* ============================================ */
 /*          DÉFINITIONS DES THÈMES            */
 /* ============================================ */
 
 /* --- THÈME 1: Nébuleuse (Sombre - Défaut) --- */
-body, body.theme-nebula { /* Appliquer par défaut et avec la classe */
-    /* Polices */
+body, body.theme-nebula {
     --font-heading: var(--font-heading-standard);
     --font-body: var(--font-body-standard);
-
-    /* Couleurs */
-    --color-primary: #3498db;       /* Bleu vibrant */
-    --color-secondary: #2c3e50;     /* Bleu nuit foncé */
-    --color-accent: #e67e22;        /* Orange vif */
-    --color-background: #1a2533;    /* Très sombre, légèrement bleu */
-    --color-surface: #2c3e50;       /* Surface éléments */
-    --color-text: #ecf0f1;          /* Texte clair standard */
-    --color-text-muted: #bdc3c7;    /* Texte plus pâle */
-    --color-text-on-primary: #ffffff;
-    --color-text-on-accent: #ffffff;
-    --color-border: #4a617a;        /* Bordure sombre mais visible */
-    --color-success: #2ecc71;
-    --color-error: #e74c3c;
-
-    /* Ombres spécifiques (si besoin) */
-     --shadow-color-rgb: 0, 0, 0; /* Noir pour ombres */
-     --shadow-md-dynamic: 0 5px 15px rgba(var(--shadow-color-rgb), 0.4);
+    --color-primary: #3498db; --color-primary-rgb: 52, 152, 219;
+    --color-secondary: #2c3e50; --color-secondary-rgb: 44, 62, 80;
+    --color-accent: #e67e22; --color-accent-rgb: 230, 126, 34;
+    --color-background: #1a2533; --color-background-rgb: 26, 37, 51;
+    --color-surface: #2c3e50; --color-surface-rgb: 44, 62, 80;
+    --color-text: #ecf0f1; --color-text-rgb: 236, 240, 241;
+    --color-text-muted: #bdc3c7; --color-text-muted-rgb: 189, 195, 199;
+    --color-text-on-primary: #ffffff; --color-text-on-accent: #ffffff;
+    --color-border: #4a617a; --color-border-rgb: 74, 97, 122;
+    --color-success: #2ecc71; --color-error: #e74c3c;
+    --shadow-color-rgb: 0, 0, 0;
+    --shadow-md-dynamic: 0 5px 15px rgba(var(--shadow-color-rgb), 0.4);
+    --scrollbar-thumb-color: var(--color-primary);
+    --scrollbar-track-color: var(--color-secondary);
 }
 
 /* --- THÈME 2: Lumière du Jour (Clair) --- */
 body.theme-daylight {
-    /* Polices */
     --font-heading: var(--font-heading-standard);
     --font-body: var(--font-body-standard);
-
-    /* Couleurs */
-    --color-primary: #2980b9;       /* Bleu plus soutenu */
-    --color-secondary: #ecf0f1;     /* Gris très clair (presque blanc) */
-    --color-accent: #d35400;        /* Orange plus profond */
-    --color-background: #f8f9fa;    /* Fond très légèrement gris */
-    --color-surface: #ffffff;       /* Surface blanche pure */
-    --color-text: #34495e;          /* Texte bleu-gris foncé */
-    --color-text-muted: #7f8c8d;    /* Texte gris moyen */
-    --color-text-on-primary: #ffffff;
-    --color-text-on-accent: #ffffff;
-    --color-border: #dde4e6;        /* Bordure très claire */
-    --color-success: #27ae60;
-    --color-error: #c0392b;
-
-    /* Ombres */
-     --shadow-color-rgb: 170, 180, 190; /* Couleur ombre claire */
-     --shadow-md-dynamic: 0 4px 12px rgba(var(--shadow-color-rgb), 0.3);
+    --color-primary: #2980b9; --color-primary-rgb: 41, 128, 185;
+    --color-secondary: #ecf0f1; --color-secondary-rgb: 236, 240, 241;
+    --color-accent: #d35400; --color-accent-rgb: 211, 84, 0;
+    --color-background: #f8f9fa; --color-background-rgb: 248, 249, 250;
+    --color-surface: #ffffff; --color-surface-rgb: 255, 255, 255;
+    --color-text: #34495e; --color-text-rgb: 52, 73, 94;
+    --color-text-muted: #7f8c8d; --color-text-muted-rgb: 127, 140, 141;
+    --color-text-on-primary: #ffffff; --color-text-on-accent: #ffffff;
+    --color-border: #dde4e6; --color-border-rgb: 221, 228, 230;
+    --color-success: #27ae60; --color-error: #c0392b;
+    --shadow-color-rgb: 170, 180, 190;
+    --shadow-md-dynamic: 0 4px 12px rgba(var(--shadow-color-rgb), 0.3);
+    --scrollbar-thumb-color: var(--color-primary);
+    --scrollbar-track-color: var(--color-secondary);
 }
 
 /* --- THÈME 3: Rétro Pixel --- */
 body.theme-pixel {
-    /* Polices */
-    --font-heading: var(--font-pixel);
-    --font-body: var(--font-pixel); /* TOUT en pixel */
-    font-smooth: never; /* Désactiver anti-aliasing */
-    -webkit-font-smoothing: none;
-    text-rendering: optimizeSpeed; /* Peut aider à l'effet pixel */
-    letter-spacing: 1px; /* Écarter un peu les lettres */
-    word-spacing: 2px;
-
-    /* Couleurs */
-    --color-primary: #33ff00;       /* Vert Vif typique */
-    --color-secondary: #333333;     /* Gris foncé presque noir */
-    --color-accent: #ffff00;        /* Jaune Vif */
-    --color-background: #000000;    /* Fond Noir profond */
-    --color-surface: #1a1a1a;       /* Surface gris très foncé */
-    --color-text: #ffffff;          /* Texte Blanc */
-    --color-text-muted: #aaaaaa;    /* Texte Gris Clair */
-    --color-text-on-primary: #000000; /* Texte Noir sur vert */
-    --color-text-on-accent: #000000;  /* Texte Noir sur jaune */
-    --color-border: #555555;        /* Bordure Grise */
-    --color-success: #00cc00;
-    --color-error: #ff3333;
-
-    /* Ombres - Moins d'ombres, plus de bordures en pixel */
-     --shadow-md-dynamic: none; /* Pas d'ombres douces */
-     /* Ajouter des bordures spécifiques plus loin si besoin */
-     --base-border-radius: 0px; /* Pas de coins arrondis */
-     border: 3px solid var(--color-border); /* Bordure générale épaisse ? */
-     image-rendering: pixelated; /* Pour que les images soient pixelisées */
+    --font-heading: var(--font-pixel); --font-body: var(--font-pixel);
+    font-smooth: never; -webkit-font-smoothing: none; text-rendering: optimizeSpeed;
+    letter-spacing: 1px; word-spacing: 2px;
+    --color-primary: #33ff00; --color-primary-rgb: 51, 255, 0; /* Vert Vif */
+    --color-secondary: #333333; --color-secondary-rgb: 51, 51, 51; /* Gris foncé */
+    --color-accent: #ffff00; --color-accent-rgb: 255, 255, 0; /* Jaune Vif */
+    --color-background: #000000; --color-background-rgb: 0, 0, 0; /* Noir */
+    --color-surface: #1a1a1a; --color-surface-rgb: 26, 26, 26; /* Gris très foncé */
+    --color-text: #ffffff; --color-text-rgb: 255, 255, 255; /* Blanc */
+    --color-text-muted: #aaaaaa; --color-text-muted-rgb: 170, 170, 170; /* Gris Clair */
+    --color-text-on-primary: #000000; --color-text-on-accent: #000000;
+    --color-border: #555555; --color-border-rgb: 85, 85, 85; /* Gris */
+    --color-success: #00cc00; --color-error: #ff3333;
+    --shadow-md-dynamic: none; --shadow-sm: none;
+    --base-border-radius: 0px;
+    border: 3px solid var(--color-border); image-rendering: pixelated;
+    --scrollbar-thumb-color: var(--color-primary);
+    --scrollbar-track-color: var(--color-secondary);
+    font-size: 12px; line-height: 1.4; /* Ajustement taille police */
 }
 
-
 /* ============================================ */
-/*          STYLES COMMUNS UTILISANT           */
-/*          LES VARIABLES DE THÈME             */
+/*          STYLES COMMUNS & STRUCTURELS       */
 /* ============================================ */
 
 /* --- Reset & Base --- */
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; font-size: 100%; /* Base pour rem */ }
 body {
-    font-family: var(--font-body); /* Utilise la variable de thème */
-    font-size: 16px; /* Ajuster si police pixel trop petite */
-    line-height: 1.6;
-    background-color: var(--color-background);
-    color: var(--color-text);
-    overflow-x: hidden;
-    padding-top: var(--header-height); /* Espace pour le header fixe */
+    font-family: var(--font-body); font-size: 1rem; line-height: 1.6;
+    background-color: var(--color-background); color: var(--color-text);
+    overflow-x: hidden; padding-top: var(--header-height);
     transition: background-color var(--transition-normal), color var(--transition-normal);
 }
-/* Ajustements spécifiques taille police pour thème pixel si nécessaire */
-body.theme-pixel {
-    font-size: 12px; /* Police pixel souvent plus lisible petite */
-    line-height: 1.4; /* Rapprocher les lignes */
-}
+/* Scrollbar personnalisée */
+body::-webkit-scrollbar { width: 8px; }
+body::-webkit-scrollbar-track { background: var(--scrollbar-track-color); }
+body::-webkit-scrollbar-thumb { background-color: var(--scrollbar-thumb-color); border-radius: 4px; }
 
 
 /* --- Header --- */
-#main-header {
-    background-color: var(--color-surface);
-    height: var(--header-height);
-    box-shadow: var(--shadow-md-dynamic, var(--shadow-md)); /* Utilise ombre dynamique si définie, sinon standard */
-    position: fixed; top: 0; width: 100%; z-index: 1000;
-    display: flex; align-items: center; padding: 0 15px;
-    border-bottom: 1px solid var(--color-border);
-    transition: background-color var(--transition-normal), border-color var(--transition-normal);
+#main-header { /* ... (Identique: fond, hauteur, shadow, position, display, padding, border, transition) ... */
+    background-color: var(--color-surface); height: var(--header-height); box-shadow: var(--shadow-md-dynamic, var(--shadow-md)); position: fixed; top: 0; width: 100%; z-index: 1000; display: flex; align-items: center; padding: 0 15px; border-bottom: 1px solid var(--color-border); transition: background-color var(--transition-normal), border-color var(--transition-normal);
 }
-/* Header en mode Pixel */
-body.theme-pixel #main-header {
-    border-bottom: 3px solid var(--color-border);
-    box-shadow: none;
+body.theme-pixel #main-header { /* ... (Pixel: border, no shadow) ... */
+     border-bottom: 3px solid var(--color-border); box-shadow: none;
 }
-
-.hamburger { /* Style de base du conteneur */
-    cursor: pointer; padding: 10px; margin-right: 10px; z-index: 1001;
+.hamburger { /* ... (Identique: curseur, padding, z-index) ... */
+     cursor: pointer; padding: 10px; margin-right: 10px; z-index: 1001;
 }
-.hamburger span { /* Style des barres */
-    display: block; width: 28px; height: 3px;
-    background: var(--color-primary); /* La couleur primaire du thème */
-    margin: 6px 0; border-radius: var(--base-border-radius); /* Utilise radius variable */
-    transition: var(--transition-normal), background-color var(--transition-normal);
-    box-shadow: 0 0 5px var(--color-primary); /* Lueur - OK pour tous? */
+.hamburger span { /* ... (Identique: display, taille, couleur, margin, radius, transition, shadow) ... */
+    display: block; width: 28px; height: 3px; background: var(--color-primary); margin: 6px 0; border-radius: var(--base-border-radius); transition: var(--transition-normal), background-color var(--transition-normal), box-shadow var(--transition-fast); box-shadow: 0 0 5px color-mix(in srgb, var(--color-primary) 50%, transparent);
 }
-/* Hamburger barres en mode Pixel */
-body.theme-pixel .hamburger span {
-    border: 1px solid var(--color-text); /* Bordure pour effet pixel */
-    border-radius: 0;
-    box-shadow: none;
-    height: 4px; /* Plus épais */
+body.theme-pixel .hamburger span { /* ... (Pixel: border, no radius, no shadow, taille) ... */
+     border: 1px solid var(--color-text); border-radius: 0; box-shadow: none; height: 4px; background: var(--color-primary);
+}
+.hamburger:hover span { /* ... (Identique: shadow accent au survol) ... */
+     box-shadow: 0 0 10px color-mix(in srgb, var(--color-accent) 80%, transparent);
+}
+body.theme-pixel .hamburger:hover span { /* ... (Pixel: couleur accent, pas de shadow) ... */
+     background-color: var(--color-accent); box-shadow: none;
 }
 .hamburger.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
 .hamburger.active span:nth-child(2) { opacity: 0; }
 .hamburger.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
-/* Survol Hamburger */
-.hamburger:hover span {
-    box-shadow: 0 0 10px var(--color-accent); /* Survol = couleur accent */
+
+#header-logo { /* ... (Identique: taille, margin, transition, hover) ... */
+     height: 45px; width: auto; margin-right: 15px; transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55), filter var(--transition-fast);
 }
-body.theme-pixel .hamburger:hover span { /* Pas de lueur en pixel */
-    background-color: var(--color-accent);
-    box-shadow: none;
+#header-logo:hover { transform: rotate(360deg) scale(1.1); filter: drop-shadow(0 0 8px var(--color-primary)); }
+body.theme-pixel #header-logo { /* ... (Pixel: rendu, transition, no filter) ... */
+    image-rendering: pixelated; transition: transform 0.1s linear; filter: none;
+}
+body.theme-pixel #header-logo:hover { transform: scale(1.1); filter: none; }
+
+#main-header h1 { /* ... (Identique: font, couleur, taille, etc.) ... */
+    font-family: var(--font-heading); color: var(--color-text); font-size: 1.5rem; font-weight: 700; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-shadow: 1px 1px 3px rgba(var(--shadow-base-color-rgb), 0.4); transition: color var(--transition-normal); flex-grow: 1; /* Occupe l'espace restant */
+}
+body.theme-pixel #main-header h1 { /* ... (Pixel: taille, shadow dure) ... */
+     font-size: 1.6rem; text-shadow: 2px 2px 0px var(--color-secondary);
 }
 
-
-#header-logo {
-    height: 45px; width: auto; margin-right: 15px;
-    transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55), filter var(--transition-fast);
+#install-button { /* ... (Identique: display, margin, padding, couleurs, etc.) ... */
+    display: none; margin-left: auto; padding: 8px 15px; background-color: var(--color-accent); color: var(--color-text-on-accent); border: none; border-radius: var(--base-border-radius); font-family: var(--font-heading); font-size: 0.9rem; font-weight: bold; cursor: pointer; transition: var(--transition-fast), background-color var(--transition-normal), color var(--transition-normal); box-shadow: 0 0 10px color-mix(in srgb, var(--color-accent) 50%, transparent); animation: pulse-install 2s infinite ease-in-out; flex-shrink: 0; /* Ne pas réduire */
 }
-#header-logo:hover {
-    transform: rotate(360deg) scale(1.1);
-    filter: drop-shadow(0 0 8px var(--color-primary)); /* Lueur sur logo */
+#install-button:hover { background-color: color-mix(in srgb, var(--color-accent) 85%, black); transform: scale(1.05); }
+@keyframes pulse-install { /* ... (Identique) ... */ 0%, 100% { transform: scale(1); box-shadow: 0 0 10px color-mix(in srgb, var(--color-accent) 50%, transparent); } 50% { transform: scale(1.03); box-shadow: 0 0 15px color-mix(in srgb, var(--color-accent) 80%, transparent); } }
+body.theme-pixel #install-button { /* ... (Pixel: border, shadow, no pulse) ... */
+    border: 2px solid var(--color-text-on-accent); box-shadow: 3px 3px 0px var(--color-secondary); animation: none;
 }
-/* Logo en mode pixel - Désactiver la rotation douce */
-body.theme-pixel #header-logo {
-    image-rendering: pixelated; /* Forcer le rendu pixel */
-    transition: transform 0.1s linear; /* Transition plus abrupte */
-    filter: none; /* Pas de lueur */
-}
-body.theme-pixel #header-logo:hover {
-    transform: scale(1.1); /* Juste un zoom simple */
-    filter: none;
-}
-
-
-#main-header h1 {
-    font-family: var(--font-heading); /* Police titre du thème */
-    color: var(--color-text);
-    font-size: 1.5em; /* Taille fixe */
-    font-weight: 700; margin: 0;
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    text-shadow: 1px 1px 3px rgba(var(--shadow-color-rgb, 0,0,0), 0.5); /* Ombre texte selon thème */
-    transition: color var(--transition-normal);
-}
-/* Titre en pixel */
-body.theme-pixel #main-header h1 {
-    font-size: 1.8em; /* Police pixel a besoin de taille plus grande */
-    text-shadow: 2px 2px 0px var(--color-secondary); /* Ombre dure pixel */
-}
-
-
-/* Bouton PWA */
-#install-button {
-    display: none; margin-left: auto;
-    padding: 8px 15px;
-    background-color: var(--color-accent); /* Utilise couleur accent du thème */
-    color: var(--color-text-on-accent); /* Texte lisible sur accent */
-    border: none; border-radius: var(--base-border-radius);
-    font-family: var(--font-heading); font-size: 0.9em; font-weight: bold; cursor: pointer;
-    transition: var(--transition-fast), background-color var(--transition-normal), color var(--transition-normal);
-    box-shadow: 0 0 10px color-mix(in srgb, var(--color-accent) 50%, transparent); /* Lueur avec couleur thème */
-    animation: pulse-install 2s infinite ease-in-out;
-}
-#install-button:hover {
-    background-color: color-mix(in srgb, var(--color-accent) 85%, black);
-    transform: scale(1.05); /* Garder l'effet de zoom au survol */
-}
-/* Bouton PWA Pixel */
-body.theme-pixel #install-button {
-    border: 2px solid var(--color-text-on-accent);
-    box-shadow: 3px 3px 0px var(--color-secondary); /* Ombre dure */
-    animation: none; /* Pas de pulse doux */
-}
-body.theme-pixel #install-button:hover {
-     transform: translate(1px, 1px); /* Effet bouton enfoncé */
-     box-shadow: 2px 2px 0px var(--color-secondary);
-}
-
-#install-button .install-icon {
-    margin-right: 8px; display: inline-block;
-    animation: rocket-wobble 1.5s infinite ease-in-out alternate;
-}
+body.theme-pixel #install-button:hover { transform: translate(1px, 1px); box-shadow: 2px 2px 0px var(--color-secondary); background-color: var(--color-accent); } /* Garder la couleur */
+#install-button .install-icon { margin-right: 8px; display: inline-block; animation: rocket-wobble 1.5s infinite ease-in-out alternate; }
 @keyframes rocket-wobble { 0% { transform: rotate(-5deg); } 100% { transform: rotate(5deg); } }
-/* Icone PWA Pixel */
-body.theme-pixel #install-button .install-icon {
-    animation: none; /* Pas de wobble */
-}
+body.theme-pixel #install-button .install-icon { animation: none; }
 
 
-/* --- Sidebar Affinée --- */
-#sidebar {
-    position: fixed; top: var(--header-height);
-    left: calc(-1 * var(--sidebar-width));
-    width: var(--sidebar-width); height: calc(100% - var(--header-height));
-    background-color: var(--color-secondary); /* Couleur secondaire du thème */
-    box-shadow: 4px 0 15px rgba(var(--shadow-color-rgb, 0,0,0), 0.2);
-    transition: left var(--transition-normal), background-color var(--transition-normal);
-    z-index: 999; padding: 15px 0; display: flex; flex-direction: column;
-    overflow-y: auto;
-    border-right: 1px solid var(--color-border);
+/* --- Sidebar --- */
+#sidebar { /* ... (Identique: position, taille, couleur, shadow, transition, z-index, padding, display, etc.) ... */
+     position: fixed; top: var(--header-height); left: calc(-1 * var(--sidebar-width)); width: var(--sidebar-width); height: calc(100% - var(--header-height)); background-color: var(--color-secondary); box-shadow: 4px 0 15px rgba(var(--shadow-color-rgb, 0,0,0), 0.2); transition: left var(--transition-normal), background-color var(--transition-normal); z-index: 999; padding: 15px 0; display: flex; flex-direction: column; overflow-y: auto; border-right: 1px solid var(--color-border);
 }
 #sidebar.active { left: 0; }
-/* Sidebar Pixel */
-body.theme-pixel #sidebar {
-    border-right: 3px solid var(--color-border);
-    box-shadow: none;
-    background-color: var(--color-surface); /* Utilise surface en pixel */
+body.theme-pixel #sidebar { /* ... (Pixel: border, no shadow, couleur surface) ... */
+    border-right: 3px solid var(--color-border); box-shadow: none; background-color: var(--color-surface);
 }
-
 #sidebar ul { list-style: none; padding: 0; margin: 0; flex-grow: 1; }
 #sidebar ul li { margin: 0; }
-
-#sidebar ul li button:not(.theme-button) {
-    background: none; border: none;
-    padding: 12px 15px 12px 20px;
-    font-size: 1.05em; font-family: var(--font-body); color: var(--color-text-muted);
-    cursor: pointer; transition: var(--transition-fast);
-    width: 100%; text-align: left; display: flex; align-items: center; gap: 12px;
-    border-left: 5px solid transparent; /* Indicateur */
-    position: relative; overflow: hidden;
+/* --- Sidebar Navigation Buttons --- */
+#sidebar ul li button:not(.theme-button) { /* ... (Styles de base du bouton nav) ... */
+     background: none; border: none; padding: 12px 15px 12px 20px; font-size: 1.05rem; font-family: var(--font-body); color: var(--color-text-muted); cursor: pointer; transition: var(--transition-fast); width: 100%; text-align: left; display: flex; align-items: center; gap: 12px; border-left: 5px solid transparent; position: relative; overflow: hidden;
 }
-/* Boutons Sidebar Pixel */
-body.theme-pixel #sidebar ul li button:not(.theme-button) {
-    font-size: 1em; /* Ajuster si besoin */
-    color: var(--color-text-muted);
-    border-left: none; /* Pas d'indicateur lisse */
-    border-bottom: 1px dashed var(--color-border); /* Ligne séparation */
-    padding: 10px 15px;
-    gap: 10px;
+body.theme-pixel #sidebar ul li button:not(.theme-button) { /* ... (Pixel: taille, couleur, pas de border-left, border-bottom dashed) ... */
+    font-size: 1rem; color: var(--color-text-muted); border-left: none; border-bottom: 1px dashed var(--color-border); padding: 10px 15px; gap: 10px;
 }
-
-#sidebar ul li button:not(.theme-button) .icon {
-    font-size: 1.1em; width: 22px; text-align: center;
-    color: var(--color-primary); /* Icône couleur primaire */
-    transition: transform var(--transition-fast), color var(--transition-fast);
-    flex-shrink: 0;
+#sidebar ul li button:not(.theme-button) .icon { /* ... (Icône style: taille, couleur, alignement) ... */
+    font-size: 1.1rem; width: 22px; text-align: center; color: var(--color-primary); transition: transform var(--transition-fast), color var(--transition-fast); flex-shrink: 0;
 }
-/* Icones Sidebar Pixel */
-body.theme-pixel #sidebar ul li button:not(.theme-button) .icon {
-     color: var(--color-accent); /* Icone en jaune? */
+body.theme-pixel #sidebar ul li button:not(.theme-button) .icon { color: var(--color-accent); } /* Pixel icône accent */
+#sidebar ul li button:not(.theme-button) .nav-text { /* ... (Style texte nav) ... */
+     transition: color var(--transition-fast); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex-grow: 1; /* Pour ellipsis */
 }
-
-#sidebar ul li button:not(.theme-button) .nav-text {
-    transition: color var(--transition-fast);
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+/* --- Sidebar Hover & Active States --- */
+#sidebar ul li button:not(.theme-button):hover { /* ... (Hover non-pixel: fond, couleur, border) ... */
+    background-color: color-mix(in srgb, var(--color-background) 80%, var(--color-surface) 20%); color: var(--color-text); border-left-color: var(--color-accent);
 }
-
-/* Effet Hover et Page Active (Non-Pixel) */
-#sidebar ul li button:not(.theme-button):hover {
-    background-color: rgba(var(--color-text-rgb, 236, 240, 241), 0.05); /* S'adapte à text clair/sombre? Non, fixons à clair pour l'instant */
-    background-color: color-mix(in srgb, var(--color-background) 80%, var(--color-surface) 20%); /* Mieux */
-    color: var(--color-text);
-    border-left-color: var(--color-accent);
+#sidebar ul li button:not(.theme-button).active-page { /* ... (Actif non-pixel: fond, couleur, poids, border) ... */
+     background-color: color-mix(in srgb, var(--color-primary) 15%, var(--color-surface) 85%); color: var(--color-text); font-weight: 700; border-left-color: var(--color-primary);
 }
-#sidebar ul li button:not(.theme-button).active-page {
-    background-color: color-mix(in srgb, var(--color-primary) 15%, var(--color-surface) 85%); /* Mieux */
-    color: var(--color-text);
-    font-weight: 700;
-    border-left-color: var(--color-primary);
+#sidebar ul li button:not(.theme-button):hover .icon { /* ... (Icône hover non-pixel) ... */
+     transform: scale(1.1) rotate(5deg); color: var(--color-accent);
 }
-#sidebar ul li button:not(.theme-button):hover .icon {
-    transform: scale(1.1) rotate(5deg);
-    color: var(--color-accent);
+#sidebar ul li button:not(.theme-button).active-page .icon { /* ... (Icône active non-pixel) ... */
+     transform: scale(1.1); color: var(--color-primary);
 }
-#sidebar ul li button:not(.theme-button).active-page .icon {
-    transform: scale(1.1);
-    color: var(--color-primary); /* Couleur primaire quand actif */
+/* --- Sidebar Hover/Active Pixel --- */
+body.theme-pixel #sidebar ul li button:not(.theme-button):hover, body.theme-pixel #sidebar ul li button:not(.theme-button).active-page { /* ... (Pixel hover/actif: fond, couleur, pas de border-left, border-bottom solide) ... */
+    background-color: var(--color-secondary); color: var(--color-accent); border-left-color: transparent; font-weight: normal; border-bottom-style: solid;
 }
-
-/* Effet Hover/Actif PIXEL */
-body.theme-pixel #sidebar ul li button:not(.theme-button):hover,
-body.theme-pixel #sidebar ul li button:not(.theme-button).active-page {
-    background-color: var(--color-secondary); /* Fond foncé au survol/actif */
-    color: var(--color-accent); /* Texte en jaune */
-    border-left-color: transparent; /* Assure que la bordure lisse n'apparaît pas */
-    font-weight: normal; /* Pas de gras */
-    border-bottom-style: solid; /* Ligne pleine */
+body.theme-pixel #sidebar ul li button:not(.theme-button):hover .icon, body.theme-pixel #sidebar ul li button:not(.theme-button).active-page .icon { /* ... (Pixel icône hover/actif) ... */
+     color: var(--color-primary); transform: none;
 }
-body.theme-pixel #sidebar ul li button:not(.theme-button):hover .icon,
-body.theme-pixel #sidebar ul li button:not(.theme-button).active-page .icon {
-    color: var(--color-primary); /* Icône en vert */
-    transform: none; /* Pas de scale/rotate */
+/* --- Sidebar Divider --- */
+.nav-divider { height: 1px; background-color: var(--color-border); margin: 15px 25px; transition: background-color var(--transition-normal); }
+body.theme-pixel .nav-divider { /* ... (Pixel divider dashed) ... */
+    height: 2px; margin: 10px 15px; background-image: linear-gradient(to right, var(--color-border) 50%, transparent 50%); background-size: 6px 2px; background-color: transparent; border: none;
 }
-
-
-.nav-divider {
-    height: 1px; background-color: var(--color-border);
-    margin: 15px 25px;
-}
-/* Divider Pixel */
-body.theme-pixel .nav-divider {
-     height: 2px; margin: 10px 15px;
-     background-image: linear-gradient(to right, var(--color-border) 50%, transparent 50%);
-     background-size: 6px 2px; /* Fait des pointillés */
-     background-color: transparent;
-     border: none;
-}
-
-
-/* Style Switcher de Thème */
+/* --- Sidebar Theme Switcher --- */
 .theme-switcher-container { padding: 10px 25px; }
-.theme-switcher-container h4 {
-    color: var(--color-text-muted); font-size: 0.8em;
-    margin-bottom: 10px; text-transform: uppercase;
-    font-weight: 500; letter-spacing: 0.5px;
-    font-family: var(--font-heading);
+.theme-switcher-container h4 { /* ... (Style titre switcher) ... */
+    color: var(--color-text-muted); font-size: 0.8rem; margin-bottom: 10px; text-transform: uppercase; font-weight: 500; letter-spacing: 0.5px; font-family: var(--font-heading); transition: color var(--transition-normal);
 }
+body.theme-pixel .theme-switcher-container h4 { font-size: 0.9rem; }
 .theme-buttons-wrapper { display: flex; flex-wrap: wrap; gap: 10px; }
-.theme-switcher-container button.theme-button {
-    background: color-mix(in srgb, var(--color-surface) 80%, var(--color-border) 20%);
-    color: var(--color-text-muted);
-    border: 1px solid var(--color-border);
-    border-radius: 50%; width: 35px; height: 35px; font-size: 1.1em; cursor: pointer;
-    transition: var(--transition-fast);
-    display: inline-flex; justify-content: center; align-items: center; flex-shrink: 0; line-height: 1;
+.theme-switcher-container button.theme-button { /* ... (Style bouton thème base) ... */
+    background: color-mix(in srgb, var(--color-surface) 80%, var(--color-border) 20%); color: var(--color-text-muted); border: 1px solid var(--color-border); border-radius: 50%; width: 35px; height: 35px; font-size: 1.1rem; cursor: pointer; transition: var(--transition-fast); display: inline-flex; justify-content: center; align-items: center; flex-shrink: 0; line-height: 1;
 }
-.theme-switcher-container button.theme-button:hover {
-    background: var(--color-surface);
-    color: var(--color-text); transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 3px 8px rgba(var(--shadow-color-rgb, 0,0,0), 0.2);
-    border-color: var(--color-primary);
+.theme-switcher-container button.theme-button:hover { /* ... (Hover bouton thème) ... */
+    background: var(--color-surface); color: var(--color-text); transform: translateY(-2px) scale(1.05); box-shadow: 0 3px 8px rgba(var(--shadow-color-rgb, 0,0,0), 0.2); border-color: var(--color-primary);
 }
-.theme-switcher-container button.theme-button.active-theme {
-    background-color: var(--color-primary); color: var(--color-text-on-primary);
-    border-color: var(--color-primary); transform: scale(1.1);
-    box-shadow: 0 0 12px color-mix(in srgb, var(--color-primary) 50%, transparent);
+.theme-switcher-container button.theme-button.active-theme { /* ... (Actif bouton thème) ... */
+     background-color: var(--color-primary); color: var(--color-text-on-primary); border-color: var(--color-primary); transform: scale(1.1); box-shadow: 0 0 12px color-mix(in srgb, var(--color-primary) 50%, transparent);
 }
-/* Boutons Thème Pixel */
-body.theme-pixel .theme-switcher-container h4 { font-size: 0.9em; }
-body.theme-pixel .theme-switcher-container button.theme-button {
-    border-radius: 0; /* Carré */
-    border: 2px solid var(--color-border);
-    background-color: var(--color-secondary);
-    width: 40px; height: 40px; font-size: 1.3em;
-    box-shadow: none;
+/* --- Theme Switcher Pixel --- */
+body.theme-pixel .theme-switcher-container button.theme-button { /* ... (Pixel bouton thème carré, border, taille) ... */
+     border-radius: 0; border: 2px solid var(--color-border); background-color: var(--color-secondary); width: 40px; height: 40px; font-size: 1.3rem; box-shadow: none;
 }
-body.theme-pixel .theme-switcher-container button.theme-button:hover {
-     transform: none;
-     background-color: var(--color-surface);
-     border-color: var(--color-accent);
-     color: var(--color-accent);
-     box-shadow: none;
+body.theme-pixel .theme-switcher-container button.theme-button:hover { /* ... (Pixel hover bouton thème) ... */
+     transform: none; background-color: var(--color-surface); border-color: var(--color-accent); color: var(--color-accent); box-shadow: none;
 }
-body.theme-pixel .theme-switcher-container button.theme-button.active-theme {
-    background-color: var(--color-primary); color: var(--color-text-on-primary);
-    border-color: var(--color-text-on-primary);
-    box-shadow: 3px 3px 0px var(--color-secondary);
-    transform: none;
+body.theme-pixel .theme-switcher-container button.theme-button.active-theme { /* ... (Pixel actif bouton thème) ... */
+    background-color: var(--color-primary); color: var(--color-text-on-primary); border-color: var(--color-text-on-primary); box-shadow: 3px 3px 0px var(--color-secondary); transform: none;
 }
 
 
 /* --- Main Content --- */
 #main-content {
     padding: 25px; max-width: 900px; margin: 0 auto;
-    min-height: calc(100vh - var(--header-height) - 60px);
-    transition: opacity var(--transition-fast); /* Pour fondus entre pages? */
-    border: 1px solid transparent; /* Pour thème pixel */
+    min-height: calc(100vh - var(--header-height) - 60px); /* Footer height approx */
+    border: 1px solid transparent; /* Réservé pour pixel */
+    transition: opacity var(--transition-fast);
 }
-/* Main Content Pixel */
-body.theme-pixel #main-content {
-    border: 3px solid var(--color-border);
-    padding: 15px;
+body.theme-pixel #main-content { border: 3px solid var(--color-border); padding: 15px; }
+#main-content h2 { /* ... (Titre section H2) ... */
+    font-family: var(--font-heading); color: var(--color-primary); font-size: 1.8rem; text-align: center; margin-bottom: 30px; text-shadow: 1px 1px 2px color-mix(in srgb, var(--color-background) 50%, transparent); transition: color var(--transition-normal);
+}
+body.theme-pixel #main-content h2 { /* ... (Pixel titre H2) ... */
+    font-size: 1.8rem; text-shadow: 2px 2px 0 var(--color-secondary), 4px 4px 0 var(--color-border); color: var(--color-accent); margin-bottom: 20px;
 }
 
-#main-content h2 { /* Style titre de section */
-     font-family: var(--font-heading);
-     color: var(--color-primary);
-     font-size: 1.8em; /* Ajuster si besoin pour pixel */
-     text-align: center;
-     margin-bottom: 30px;
-     text-shadow: 1px 1px 2px color-mix(in srgb, var(--color-background) 50%, transparent);
+
+/* --- Generic Card Style --- */
+.card-style {
+    background-color: var(--color-surface); padding: 20px; margin-bottom: 25px; border-radius: var(--base-border-radius); border: 1px solid var(--color-border); box-shadow: var(--shadow-sm); transition: var(--transition-normal); overflow: hidden;
 }
-/* Titre h2 Pixel */
-body.theme-pixel #main-content h2 {
-     font-size: 2em;
-     text-shadow: 2px 2px 0 var(--color-secondary), 4px 4px 0 var(--color-border); /* Double ombre dure */
-     color: var(--color-accent); /* Titres en jaune? */
-     margin-bottom: 20px;
+.card-style:hover {
+    border-color: color-mix(in srgb, var(--color-primary) 80%, transparent);
+    box-shadow: var(--shadow-md-dynamic, var(--shadow-md));
 }
+body.theme-pixel .card-style {
+     border: 3px solid var(--color-border); box-shadow: none; padding: 15px;
+}
+body.theme-pixel .card-style:hover {
+    border-color: var(--color-primary); transform: translate(2px, 2px); box-shadow: -2px -2px 0 var(--color-secondary);
+}
+
+
+/* --- Section: Actualités (Scoops) --- */
+/* #news-container {} */
+.news-item { /* Hérite de card-style */ }
+.news-title { /* ... (styles spécifiques titre actu) ... */
+    font-family: var(--font-heading); color: var(--color-primary); font-size: 1.4rem; margin: 0 0 8px 0; line-height: 1.3; transition: color var(--transition-normal);
+}
+body.theme-pixel .news-title { font-size: 1.3rem; color: var(--color-accent); }
+.news-date { /* ... (styles date actu) ... */
+    font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 15px; display: flex; align-items: center; gap: 6px; transition: color var(--transition-normal);
+}
+body.theme-pixel .news-date { font-size: 0.9rem; } /* Police pixel plus lisible grande */
+.news-date i { font-size: 0.9em; }
+.news-image-container { margin-bottom: 15px; max-height: 300px; overflow: hidden; border-radius: calc(var(--base-border-radius) / 1.5); }
+body.theme-pixel .news-image-container { border-radius: 0; max-height: none; border: 1px solid var(--color-border); }
+.news-image { display: block; width: 100%; height: auto; object-fit: cover; max-height: inherit; border: none; }
+body.theme-pixel .news-image { image-rendering: pixelated; }
+.news-content { color: var(--color-text); line-height: 1.7; transition: color var(--transition-normal); }
+body.theme-pixel .news-content { line-height: 1.5; font-size: 1rem; }
+.news-content p { margin-bottom: 0; }
+.vibe-o-meter { /* ... (styles vibe-o-meter placeholder) ... */
+     margin-top: 20px; padding-top: 15px; border-top: 1px dashed var(--color-border); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; transition: border-color var(--transition-normal);
+}
+body.theme-pixel .vibe-o-meter { border-top: 2px dashed var(--color-border); }
+.vibe-o-meter span:first-child { font-size: 0.9rem; color: var(--color-text-muted); font-weight: bold; margin-right: 5px; }
+button.vibe-btn { /* ... (styles bouton vibe) ... */
+    background: color-mix(in srgb, var(--color-surface) 70%, var(--color-background) 30%); border: 1px solid var(--color-border); color: var(--color-text-muted); padding: 5px 10px; border-radius: 15px; font-size: 0.8rem; cursor: pointer; transition: var(--transition-fast); display: inline-flex; align-items: center; gap: 5px;
+}
+button.vibe-btn:hover { background-color: var(--color-surface); color: var(--color-primary); border-color: var(--color-primary); transform: scale(1.05); }
+button.vibe-btn i { font-size: 1.1em; }
+button.vibe-btn .count { font-size: 0.9em; opacity: 0.8; } /* Compteur (sera dynamique) */
+body.theme-pixel button.vibe-btn { /* ... (Pixel bouton vibe) ... */
+    border-radius: 0; border: 2px solid var(--color-border); background-color: var(--color-secondary); font-size: 0.9rem; padding: 4px 8px; gap: 4px;
+}
+body.theme-pixel button.vibe-btn:hover { color: var(--color-primary); border-color: var(--color-primary); background-color: var(--color-surface); transform: none; }
+
+
+/* --- Section: Calendrier (Vortex) --- */
+/* #events-container {} */
+.event-item { /* Hérite de card-style, mais avec border spéciale */
+     border-left: 5px solid var(--color-primary); padding: 15px 20px;
+     display: flex; flex-direction: row; gap: 20px; /* Layout par défaut */
+     transition: var(--transition-normal);
+}
+body.theme-pixel .event-item { border-left: none; border: 3px solid var(--color-primary); } /* Bordure complète en pixel */
+.event-date-time { /* Bloc date/heure */
+     font-family: var(--font-body); font-weight: normal; color: var(--color-primary); font-size: 0.95rem; text-align: left; flex-basis: 240px; /* Largeur fixe */ flex-shrink: 0; padding-right: 15px; line-height: 1.4; text-transform: capitalize; transition: color var(--transition-normal); border-right: 1px solid var(--color-border); /* Séparateur léger */
+}
+body.theme-pixel .event-date-time { flex-basis: auto; padding-right: 0; border-right: none; border-bottom: 2px dashed var(--color-border); margin-bottom: 10px; padding-bottom: 10px; text-align: center; font-size: 1rem;} /* Date en haut en pixel */
+.event-details { flex-grow: 1; } /* Le reste du contenu */
+.event-details h4 { /* Titre de l'event */
+     font-family: var(--font-heading); color: var(--color-text); font-size: 1.2rem; font-weight: 700; margin: 0 0 8px 0; transition: color var(--transition-normal);
+}
+body.theme-pixel .event-details h4 { font-size: 1.3rem; color: var(--color-primary); }
+.event-description { /* Description event */
+     font-size: 0.95rem; color: var(--color-text-muted); margin: 0 0 5px 0; line-height: 1.5; transition: color var(--transition-normal);
+}
+body.theme-pixel .event-description { font-size: 1rem; color: var(--color-text); }
+.event-location { /* Lieu event */
+    font-style: italic; font-size: 0.9em !important; color: var(--color-text-muted); transition: color var(--transition-normal);
+}
+body.theme-pixel .event-location { color: var(--color-accent); font-style: normal; font-size: 1rem !important;}
+.event-location i { margin-right: 5px; color: var(--color-accent); transition: color var(--transition-normal); }
+body.theme-pixel .event-location i { color: var(--color-accent); }
+/* Responsive Calendrier */
+@media (max-width: 768px) {
+    .event-item { flex-direction: column; gap: 10px; padding: 15px; }
+    .event-date-time { flex-basis: auto; padding-right: 0; border-right: none; border-bottom: 1px dashed var(--color-border); padding-bottom: 8px; margin-bottom: 10px; text-align: center; font-size: 0.9em; }
+    .event-details h4 { font-size: 1.1em; text-align: center; }
+    .event-details p { font-size: 0.9em; }
+    body.theme-pixel .event-date-time { font-size: 1rem; }
+}
+
+
+/* --- Section: Partenaires (Galaxie) --- */
+/* #partners-container {} */
+.partner-category-title { /* Titre de catégorie */
+    font-family: var(--font-heading); color: var(--color-primary); font-size: 1.5rem; font-weight: 700; margin: 35px 0 15px 0; padding-bottom: 5px; border-bottom: 2px solid var(--color-secondary); text-align: left; transition: var(--transition-normal);
+}
+body.theme-pixel .partner-category-title { font-size: 1.6rem; border-bottom: 3px solid var(--color-border); }
+#partners-container > .partner-category-title:first-of-type { margin-top: 0; }
+.partner-category-grid { /* Grille des cartes */
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; margin-bottom: 30px;
+}
+body.theme-pixel .partner-category-grid { gap: 15px; }
+a.partner-link { /* Style lien carte */
+     text-decoration: none; color: inherit; display: block; height: 100%; transition: transform var(--transition-fast), box-shadow var(--transition-fast); border-radius: var(--base-border-radius); /* Pour focus outline */ outline-offset: 2px;
+}
+a.partner-link:hover { transform: translateY(-4px); box-shadow: var(--shadow-md-dynamic, var(--shadow-md)); }
+a.partner-link:focus-visible { outline: 2px solid var(--color-accent); } /* Accessibilité */
+body.theme-pixel a.partner-link:hover { transform: translate(2px, 2px); box-shadow: -2px -2px 0 var(--color-secondary); }
+body.theme-pixel a.partner-link:focus-visible { outline: 2px dashed var(--color-accent); outline-offset: 3px;}
+.partner-card { /* Hérite card-style, styles spécifiques */
+    text-align: center; height: 100%; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; padding: 15px;
+}
+.partner-logo { max-width: 80px; max-height: 60px; height: auto; object-fit: contain; margin-bottom: 15px; }
+.logo-placeholder { width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-bottom: 15px; color: var(--color-text-muted); font-size: 1.8rem; flex-shrink: 0; }
+.logo-placeholder.placeholder-default { background-color: color-mix(in srgb, var(--color-surface) 80%, var(--color-border) 20%); }
+.logo-placeholder.placeholder-error { background-color: transparent; color: var(--color-error); }
+.logo-placeholder i { line-height: 1; }
+body.theme-pixel .partner-logo { image-rendering: pixelated; border: 1px solid var(--color-border); padding: 2px;}
+body.theme-pixel .logo-placeholder { border-radius: 0; background-color: var(--color-secondary); width: 50px; height: 50px; border: 2px solid var(--color-border);}
+.partner-card h4 { /* Nom partenaire */
+    font-family: var(--font-heading); color: var(--color-primary); font-size: 1.1rem; font-weight: 700; margin: 0 0 8px 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; min-height: 2.4em; transition: color var(--transition-normal);
+}
+body.theme-pixel .partner-card h4 { font-size: 1rem; color: var(--color-text); }
+.partner-description { /* Description partenaire */
+    font-size: 0.9rem; color: var(--color-text-muted); line-height: 1.4; margin-bottom: 0; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; flex-grow: 1; transition: color var(--transition-normal);
+}
+body.theme-pixel .partner-description { font-size: 0.9rem; color: var(--color-text-muted); }
+/* Responsive Partenaires */
+@media (max-width: 768px) { .partner-category-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 15px; } }
+@media (max-width: 480px) { .partner-category-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px; } }
+
+
+/* --- Section: Membres (Equipage) --- */
+/* #members-container {} */
+.members-grid { /* Grille membres */
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 25px;
+}
+.member-card { /* Hérite card-style */
+     text-align: center; padding: 20px 15px;
+}
+.member-photo { /* Photo */
+     width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 15px; border: 3px solid var(--color-border); background-color: var(--color-secondary); transition: border-color var(--transition-normal);
+}
+body.theme-pixel .member-photo { border-radius: 0; border: 2px solid var(--color-border); image-rendering: pixelated; }
+.member-placeholder { /* Placeholder si pas de photo */
+    width: 100px; height: 100px; border-radius: 50%; background-color: color-mix(in srgb, var(--color-surface) 80%, var(--color-border) 20%); color: var(--color-text-muted); display: flex; justify-content: center; align-items: center; font-size: 3rem; margin-bottom: 15px; border: 3px solid var(--color-border); transition: var(--transition-normal);
+}
+.member-placeholder i { line-height: 1; }
+.member-placeholder.placeholder-error { background-color: transparent; color: var(--color-error); }
+body.theme-pixel .member-placeholder { border-radius: 0; border: 2px solid var(--color-border); background-color: var(--color-secondary); font-size: 3rem; }
+.member-card h4 { /* Nom membre */
+     font-family: var(--font-heading); color: var(--color-text); font-size: 1.2rem; font-weight: 700; margin: 0 0 5px 0; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; transition: color var(--transition-normal);
+}
+body.theme-pixel .member-card h4 { font-size: 1.1rem; color: var(--color-accent); }
+.member-role { /* Rôle(s) */
+    font-size: 0.9rem; color: var(--color-primary); font-weight: bold; margin: 0 0 8px 0; line-height: 1.3; transition: color var(--transition-normal);
+}
+body.theme-pixel .member-role { font-size: 0.9rem; color: var(--color-primary); }
+.member-operation { /* Opération/Base */
+    font-size: 0.9rem; color: var(--color-text-muted); margin: 0; transition: color var(--transition-normal);
+}
+body.theme-pixel .member-operation { font-size: 0.9rem; }
+/* Responsive Membres */
+@media (max-width: 768px) { .members-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 20px; } .member-photo, .member-placeholder { width: 80px; height: 80px; font-size: 2.5em; } }
+@media (max-width: 480px) { .members-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 15px; } .member-photo, .member-placeholder { width: 70px; height: 70px; font-size: 2em; } }
+
+
+/* --- Section: Formulaires --- */
+.form-container { /* Conteneur général de formulaire, hérite card-style */
+    padding: 25px 30px;
+}
+body.theme-pixel .form-container { padding: 20px; }
+.form-container h3 { font-family: var(--font-heading); color: var(--color-primary); margin-bottom: 10px; font-size: 1.3rem; text-align: center; transition: color var(--transition-normal); }
+.form-container p:first-of-type { color: var(--color-text-muted); text-align: center; margin-bottom: 25px; transition: color var(--transition-normal); }
+body.theme-pixel .form-container h3 { font-size: 1.2rem; }
+body.theme-pixel .form-container p:first-of-type { font-size: 1rem; }
+
+.form-group, fieldset.form-group { margin-bottom: 20px; border: none; padding: 0; }
+fieldset.nested-group { /* Pour groupe rechargement café */
+     padding: 15px; border: 1px solid var(--color-border); border-radius: var(--base-border-radius); margin-top: 10px; background-color: color-mix(in srgb, var(--color-surface) 50%, var(--color-background) 50%); transition: var(--transition-normal);
+}
+fieldset.nested-group legend { font-weight: bold; color: var(--color-text-muted); padding: 0 5px; margin-left: 10px; font-size: 0.9rem; transition: color var(--transition-normal); }
+body.theme-pixel fieldset.nested-group { border: 2px dashed var(--color-border); background: none; }
+body.theme-pixel fieldset.nested-group legend { background: var(--color-surface); color: var(--color-text); }
+
+label { display: block; margin-bottom: 8px; font-weight: 700; font-size: 0.95rem; color: var(--color-text); transition: color var(--transition-normal); }
+label.required::after { content: " *"; color: var(--color-error); font-weight: normal; }
+body.theme-pixel label { font-size: 1rem; }
+
+input[type="text"], input[type="email"], input[type="date"], input[type="time"], select, textarea {
+    width: 100%; padding: 10px 12px; border: 1px solid var(--color-border); border-radius: var(--base-border-radius); box-sizing: border-box; font-size: 1rem; font-family: var(--font-body); background-color: var(--color-background); color: var(--color-text); transition: var(--transition-fast);
+}
+select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23bdc3c7' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.7rem center; background-size: 1rem; padding-right: 2.5rem; } /* Style flèche select */
+textarea { min-height: 100px; resize: vertical; }
+
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 20%, transparent); background-color: var(--color-surface); }
+::placeholder { color: var(--color-text-muted); opacity: 0.8; }
+/* Inputs Pixel */
+body.theme-pixel input[type="text"], body.theme-pixel input[type="email"], body.theme-pixel input[type="date"], body.theme-pixel input[type="time"], body.theme-pixel select, body.theme-pixel textarea { border-radius: 0; border-width: 2px; font-size: 1rem; padding: 8px; background-color: var(--color-secondary); }
+body.theme-pixel select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23aaa' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");} /* Flèche grise */
+body.theme-pixel input:focus, body.theme-pixel select:focus, body.theme-pixel textarea:focus { border-color: var(--color-accent); box-shadow: none; background-color: var(--color-secondary); }
+
+/* Checkboxes */
+.checkbox-group { margin-top: 5px; padding-left: 5px; }
+.checkbox-label { display: block; margin-bottom: 12px; cursor: pointer; font-weight: normal; color: var(--color-text); position: relative; padding-left: 30px; line-height: 1.4; user-select: none; }
+.checkbox-label input[type="checkbox"] { position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0; } /* Cache la checkbox native */
+.checkbox-label .checkmark { /* Crée une fausse checkbox */
+    position: absolute; top: 0; left: 0; height: 20px; width: 20px; background-color: color-mix(in srgb, var(--color-surface) 50%, var(--color-border) 50%); border: 1px solid var(--color-border); border-radius: calc(var(--base-border-radius) / 2); transition: var(--transition-fast);
+}
+.checkbox-label:hover .checkmark { background-color: color-mix(in srgb, var(--color-surface) 70%, var(--color-border) 30%); }
+.checkbox-label input:checked ~ .checkmark { background-color: var(--color-primary); border-color: var(--color-primary); }
+.checkmark::after { /* Le "check" */ content: ""; position: absolute; display: none; left: 6px; top: 2px; width: 5px; height: 10px; border: solid var(--color-text-on-primary); border-width: 0 3px 3px 0; transform: rotate(45deg); }
+.checkbox-label input:checked ~ .checkmark::after { display: block; }
+/* Checkbox Pixel */
+body.theme-pixel .checkbox-label { padding-left: 25px; font-size: 1rem; }
+body.theme-pixel .checkbox-label .checkmark { border-radius: 0; height: 18px; width: 18px; background-color: var(--color-secondary); border-width: 2px; }
+body.theme-pixel .checkbox-label:hover .checkmark { background-color: var(--color-surface); }
+body.theme-pixel .checkbox-label input:checked ~ .checkmark { background-color: var(--color-accent); border-color: var(--color-accent); }
+body.theme-pixel .checkmark::after { border-color: var(--color-text-on-accent); left: 5px; top: 1px; width: 4px; height: 8px; border-width: 0 3px 3px 0;}
+
+button.submit-button { /* Style Bouton Submit Form */
+    background-color: var(--color-primary); color: var(--color-text-on-primary); border: none; padding: 12px 25px; border-radius: var(--base-border-radius); cursor: pointer; font-size: 1.1rem; font-weight: 700; font-family: var(--font-heading); width: 100%; transition: var(--transition-fast); margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 10px;
+}
+button.submit-button:hover:not(:disabled) { background-color: color-mix(in srgb, var(--color-primary) 85%, black); transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+button.submit-button:active:not(:disabled) { transform: translateY(1px); box-shadow: none;}
+button.submit-button:disabled { background-color: color-mix(in srgb, var(--color-text-muted) 50%, transparent); cursor: not-allowed; opacity: 0.7; }
+/* Bouton Submit Pixel */
+body.theme-pixel button.submit-button { border-radius: 0; border: 2px solid var(--color-text-on-primary); font-size: 1rem; box-shadow: 3px 3px 0px var(--color-secondary); padding: 10px 20px; }
+body.theme-pixel button.submit-button:hover:not(:disabled) { transform: translate(1px, 1px); box-shadow: 2px 2px 0px var(--color-secondary); background-color: var(--color-primary); }
+body.theme-pixel button.submit-button:active:not(:disabled) { transform: translate(2px, 2px); box-shadow: 1px 1px 0px var(--color-secondary); }
+body.theme-pixel button.submit-button:disabled { opacity: 0.5; box-shadow: none; }
+
+/* Messages Confirmation/Envoi Formulaire */
+.form-status-sending, .confirmation-message { padding: 12px; border-radius: var(--base-border-radius); text-align: center; margin-top: 15px; font-weight: 500; border: 1px solid transparent; transition: var(--transition-fast); font-size: 0.95rem;}
+.form-status-sending { background-color: color-mix(in srgb, var(--color-accent) 15%, var(--color-background)); color: var(--color-accent); border-color: color-mix(in srgb, var(--color-accent) 30%, var(--color-border)); }
+.confirmation-message { background-color: color-mix(in srgb, var(--color-success) 15%, var(--color-background)); color: var(--color-success); border-color: color-mix(in srgb, var(--color-success) 30%, var(--color-border)); }
+/* Messages Form Pixel */
+body.theme-pixel .form-status-sending, body.theme-pixel .confirmation-message { border-radius: 0; border-width: 2px; font-size: 1rem;}
+body.theme-pixel .form-status-sending { background-color: var(--color-secondary); color: var(--color-accent); border-color: var(--color-accent);}
+body.theme-pixel .confirmation-message { background-color: var(--color-secondary); color: var(--color-success); border-color: var(--color-success);}
+
+
+/* --- Section: Boosters (AccèsCE / Action Logement) --- */
+.sub-section { margin-bottom: 30px; } /* Espace entre sous-sections */
+.sub-section h3 { font-family: var(--font-heading); color: var(--color-primary); font-size: 1.5rem; margin-bottom: 15px; padding-bottom: 5px; border-bottom: 2px solid var(--color-secondary); display: flex; align-items: center; gap: 10px; transition: var(--transition-normal); }
+.icon-boost { font-size: 0.9em; opacity: 0.8; }
+body.theme-pixel .sub-section h3 { border-bottom: 3px solid var(--color-border); font-size: 1.4rem;}
+
+.highlight-box { /* ... (styles existants: fond accent, border-left) ... */
+    background-color: color-mix(in srgb, var(--color-accent) 15%, var(--color-background)); border-left: 5px solid var(--color-accent); padding: 15px 20px; margin: 20px 0; border-radius: var(--base-border-radius); transition: var(--transition-normal);
+}
+body.theme-pixel .highlight-box { border-radius: 0; border: 2px solid var(--color-accent); border-left-width: 5px; background-color: var(--color-surface); }
+.highlight-box ul { list-style: none; padding: 0; margin: 0; } .highlight-box li { margin-bottom: 8px; }
+
+.bullet-list, .step-list { margin: 15px 0 15px 25px; padding: 0; } .bullet-list li, .step-list li { margin-bottom: 8px; }
+body.theme-pixel .bullet-list { list-style: none; } body.theme-pixel .bullet-list li::before { content: "> "; color: var(--color-primary); font-weight: bold;} /* Puce pixel */
+body.theme-pixel .step-list { list-style-type: decimal; margin-left: 35px;}
+
+.action-button { /* ... (styles bouton action existants) ... */
+    display: inline-block; padding: 10px 20px; background-color: var(--color-primary); color: var(--color-text-on-primary); border: none; border-radius: var(--base-border-radius); font-weight: bold; text-decoration: none; transition: var(--transition-fast); cursor: pointer; font-family: var(--font-heading);
+}
+.action-button:hover { background-color: color-mix(in srgb, var(--color-primary) 85%, black); transform: translateY(-2px); }
+body.theme-pixel .action-button { border: 2px solid var(--color-text-on-primary); border-radius: 0; box-shadow: 2px 2px 0px var(--color-secondary); }
+body.theme-pixel .action-button:hover { transform: translate(1px, 1px); box-shadow: 1px 1px 0px var(--color-secondary); background-color: var(--color-primary); }
+
+.contact-prompt { /* ... (styles boîte contact/info) ... */
+     margin-top: 25px; padding: 10px 15px; background-color: var(--color-secondary); border-radius: var(--base-border-radius); border-left: 4px solid var(--color-accent); font-size:0.9rem; color: var(--color-text-muted); transition: var(--transition-normal);
+}
+body.theme-pixel .contact-prompt { border-radius: 0; border: 2px solid var(--color-accent); border-left-width: 4px; background-color: var(--color-surface); }
+button.inline-link-button { /* ... (styles lien dans texte) ... */
+    background: none; border: none; padding: 0; margin: 0 2px; font: inherit; color: var(--color-primary); text-decoration: underline; cursor: pointer; font-weight: bold; vertical-align: baseline;
+}
+button.inline-link-button:hover { color: var(--color-accent); }
+body.theme-pixel button.inline-link-button { color: var(--color-accent); text-decoration: none; border-bottom: 2px dotted var(--color-accent); }
+body.theme-pixel button.inline-link-button:hover { color: var(--color-primary); border-bottom-color: var(--color-primary); }
+
+
+/* --- Section: Accueil --- */
+/* Styles ajoutés directement dans la fonction injectAccueilPage pour les éléments spécifiques */
+/* .icon-list {} .animation-pulse {} */
+
+
+/* --- Utility & State Classes --- */
+.loading-message, .error-message { padding: 15px; text-align: center; margin: 20px auto; border-radius: var(--base-border-radius); max-width: 600px; }
+.loading-message { color: var(--color-text-muted); font-style: italic; }
+.error-message { background-color: color-mix(in srgb, var(--color-error) 15%, var(--color-background) 85%); color: var(--color-error); font-weight: bold; border: 1px solid var(--color-error); transition: var(--transition-normal); }
+.error-message i { margin-right: 8px; }
+body.theme-pixel .loading-message { font-size: 1rem; color: var(--color-text-muted); }
+body.theme-pixel .error-message { border-radius: 0; border: 2px solid var(--color-error); background-color: var(--color-secondary); color: var(--color-error); font-weight: normal; font-size: 1rem; }
+.text-center { text-align: center; }
+
+/* Classe pour les conteneurs pendant chargement CSV */
+.loading-state { min-height: 150px; display: flex; justify-content: center; align-items: center; opacity: 0.7;}
+
+/* --- Animations --- */
+@keyframes simplePulse { 0% { transform: scale(1); } 50% { transform: scale(1.08); } 100% { transform: scale(1); } }
+@keyframes fa-spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); }}
 
 
 /* --- Footer --- */
-#main-footer {
-    text-align: center; padding: 15px;
-    background: var(--color-surface);
-    color: var(--color-text-muted);
-    font-size: 0.9em;
-    border-top: 1px solid var(--color-border);
-    margin-top: 30px;
-    transition: var(--transition-normal);
+#main-footer { /* ... (Identique: styles footer base) ... */
+    text-align: center; padding: 15px; background: var(--color-surface); color: var(--color-text-muted); font-size: 0.9rem; border-top: 1px solid var(--color-border); margin-top: 30px; transition: var(--transition-normal);
 }
-/* Footer Pixel */
-body.theme-pixel #main-footer {
-     border-top: 3px solid var(--color-border);
-     font-size: 0.8em;
-     padding: 10px;
+body.theme-pixel #main-footer { /* ... (Pixel footer) ... */
+    border-top: 3px solid var(--color-border); font-size: 0.9rem; padding: 10px;
 }
 
+/* ============================================ */
+/*              RESPONSIVE DESIGN              */
+/* ============================================ */
 
-/* --- Classes Utilitaires Basiques --- */
-.loading-message, .error-message {
-    padding: 15px; text-align: center; margin: 20px auto;
-    border-radius: var(--base-border-radius);
-    max-width: 600px;
-}
-.loading-message { color: var(--color-text-muted); font-style: italic; }
-.error-message {
-    background-color: color-mix(in srgb, var(--color-error) 15%, var(--color-background) 85%);
-    color: var(--color-error);
-    font-weight: bold;
-    border: 1px solid var(--color-error);
-}
-/* Messages Pixel */
-body.theme-pixel .loading-message { color: var(--color-text-muted); }
-body.theme-pixel .error-message {
-    border: 2px solid var(--color-error);
-    background-color: var(--color-secondary);
-    border-radius: 0;
-    color: var(--color-error);
-    font-weight: normal;
-}
-
-
-/* --- Responsive --- */
 @media (max-width: 768px) {
-   /* ... (ajustements tailles sidebar/header comme avant) ... */
+   :root { /* Ajuster dimensions base pour mobile */
+       --header-height: 60px;
+       --sidebar-width: 240px;
+   }
+   body { font-size: 0.95rem; } /* Légère réduction police générale */
+   body.theme-pixel { font-size: 11px; } /* Ajustement pixel pour mobile */
 
-    #main-content { padding: 15px; }
-    #main-header h1 { font-size: 1.3em; }
-    body.theme-pixel #main-header h1 { font-size: 1.5em; } /* Ajustement pour Pixel */
-    #install-button { padding: 6px 10px; font-size: 0.8em; }
+   #sidebar { left: calc(-1 * var(--sidebar-width)); }
 
-    /* Sidebar Responsive (Commun) */
-    #sidebar ul li button:not(.theme-button) {
-        padding: 10px 15px; font-size: 1em; border-left-width: 4px; gap: 10px;
-    }
-    #sidebar ul li button:not(.theme-button) .icon { width: 20px; font-size: 1em; }
+   #main-header { padding: 0 10px; }
+   #main-header h1 { font-size: 1.3rem; }
+   body.theme-pixel #main-header h1 { font-size: 1.4rem; }
+   #install-button { padding: 6px 10px; font-size: 0.8rem; }
 
-     /* Sidebar Responsive (Pixel) */
-    body.theme-pixel #sidebar ul li button:not(.theme-button) {
-        font-size: 0.9em; padding: 8px 10px; gap: 8px;
-    }
+    #main-content { padding: 15px; max-width: 100%; }
+    #main-content h2 { font-size: 1.5rem; margin-bottom: 20px; }
+    body.theme-pixel #main-content h2 { font-size: 1.6rem; }
 
-    /* Theme Switcher Responsive (Commun) */
-    .theme-switcher-container { padding: 10px 15px; }
-    .theme-buttons-wrapper { gap: 8px; }
-    .theme-switcher-container button.theme-button { width: 32px; height: 32px; font-size: 1em; }
+    .card-style, .form-container { padding: 15px; }
+    body.theme-pixel .card-style, body.theme-pixel .form-container { padding: 12px; }
 
-     /* Theme Switcher Responsive (Pixel) */
-    body.theme-pixel .theme-switcher-container button.theme-button {
-        width: 35px; height: 35px; font-size: 1.1em;
-    }
+    /* Sidebar Nav Responsive */
+   #sidebar ul li button:not(.theme-button) { padding: 10px 15px; font-size: 1rem; border-left-width: 4px; gap: 10px; }
+   #sidebar ul li button:not(.theme-button) .icon { width: 20px; font-size: 1rem; }
+   body.theme-pixel #sidebar ul li button:not(.theme-button) { font-size: 0.95rem; padding: 8px 10px; gap: 8px; }
 
-    /* Titres Sections Responsive */
-    #main-content h2 { font-size: 1.5em; }
-    body.theme-pixel #main-content h2 { font-size: 1.6em; }
+    /* Theme Switcher Responsive */
+   .theme-switcher-container { padding: 10px 15px; }
+   .theme-buttons-wrapper { gap: 8px; justify-content: center;} /* Centrer boutons si peu */
+   .theme-switcher-container button.theme-button { width: 32px; height: 32px; font-size: 1rem; }
+   body.theme-pixel .theme-switcher-container button.theme-button { width: 35px; height: 35px; font-size: 1.1rem; }
+
+   /* Responsive Partenaires Grid */
+   .partner-category-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 15px; }
+
+   /* Responsive Membres Grid */
+   .members-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; }
+   .member-photo, .member-placeholder { width: 70px; height: 70px; font-size: 2.5rem; }
+
+   /* Responsive Formulaires */
+   button.submit-button { font-size: 1rem; padding: 10px 20px; }
+   body.theme-pixel button.submit-button { font-size: 1rem; padding: 8px 15px;}
+
 }
+
+@media (max-width: 480px) {
+    body { line-height: 1.5; } /* Ajuster interligne sur petit écran */
+    body.theme-pixel { font-size: 10px; }
+
+   #main-header { padding: 0 5px;}
+   #header-logo { height: 40px; margin-right: 10px;}
+   #main-header h1 { font-size: 1.1rem; } /* Cacher partie texte si trop long ? */
+   body.theme-pixel #main-header h1 { font-size: 1.2rem; }
+   #install-button { font-size: 0.7rem; padding: 5px 8px; }
+   #install-button .install-icon { display: none; } /* Cacher icone si pas assez place */
+
+   .partner-category-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; }
+   .members-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px; }
+}
+
+/* ============================================ */
+/*              FIN DU STYLESHEET              */
+/* ============================================ */
